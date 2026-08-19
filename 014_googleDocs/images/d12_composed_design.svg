@@ -1,0 +1,22 @@
+<svg viewBox="0 0 980 340" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif"><rect x="0" y="0" width="980" height="340" fill="#ffffff"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4b5563"/></marker><marker id="arrowb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111827"/></marker></defs><rect x="20" y="140" width="130" height="44" rx="22.0" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="85.0" y="167.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">Editors</text>
+<rect x="200" y="140" width="160" height="44" rx="10" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+<text x="280.0" y="167.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">Gateway fleet</text>
+<rect x="420" y="120" width="220" height="70" rx="10" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+<text x="530.0" y="152.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">Session server</text>
+<text x="530.0" y="168.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">OT + serialization</text>
+<path d="M 720 40.24 L 720 83.76 A 100.0 10.24 0 0 0 920 83.76 L 920 40.24" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<ellipse cx="820.0" cy="40.24" rx="100.0" ry="10.24" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<text x="820.0" y="70.072" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">Op log</text>
+<path d="M 720 230.24 L 720 273.76 A 100.0 10.24 0 0 0 920 273.76 L 920 230.24" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<ellipse cx="820.0" cy="230.24" rx="100.0" ry="10.24" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<text x="820.0" y="260.072" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">Snapshot store</text>
+<line x1="150" y1="162" x2="200" y2="162" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="360" y1="150" x2="420" y2="145" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="390.0" y="137.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#4b5563">route by document_id</text>
+<line x1="420" y1="175" x2="360" y2="178" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<text x="390.0" y="196.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#4b5563">broadcast committed op</text>
+<path d="M 640 145 Q 680.0 127.5 720 70" fill="none" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="680.0" y="93.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#4b5563">persist before ack</text>
+<path d="M 640 175 Q 680.0 192.5 720 250" fill="none" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<text x="680.0" y="230.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#4b5563">periodic</text></svg>

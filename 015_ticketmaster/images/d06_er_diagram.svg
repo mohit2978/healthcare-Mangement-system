@@ -1,0 +1,29 @@
+<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif">
+<rect x="0" y="0" width="560" height="240" fill="#ffffff"/>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4b5563"/></marker>
+<marker id="arrowb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111827"/></marker>
+</defs>
+<rect x="20" y="20" width="210" height="70" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+<rect x="20" y="20" width="210" height="30" rx="8" fill="#6366f1"/>
+<rect x="20" y="36" width="210" height="14" fill="#6366f1"/>
+<text x="125.0" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Seat</text>
+<text x="30" y="68" font-size="11" fill="#1e293b">event_id, seat_id</text>
+<text x="30" y="86" font-size="11" fill="#1e293b">status</text>
+<rect x="300" y="20" width="210" height="70" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+<rect x="300" y="20" width="210" height="30" rx="8" fill="#6366f1"/>
+<rect x="300" y="36" width="210" height="14" fill="#6366f1"/>
+<text x="405.0" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Hold</text>
+<text x="310" y="68" font-size="11" fill="#1e293b">hold_id, seat_id</text>
+<text x="310" y="86" font-size="11" fill="#1e293b">expires_at</text>
+<rect x="300" y="160" width="210" height="70" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+<rect x="300" y="160" width="210" height="30" rx="8" fill="#6366f1"/>
+<rect x="300" y="176" width="210" height="14" fill="#6366f1"/>
+<text x="405.0" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Order</text>
+<text x="310" y="208" font-size="11" fill="#1e293b">order_id</text>
+<text x="310" y="226" font-size="11" fill="#1e293b">seat_ids</text>
+<line x1="230" y1="50" x2="300" y2="50" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="255" y="42" font-size="10" fill="#4b5563">1</text><text x="290" y="42" font-size="10" fill="#4b5563">0..1</text>
+<line x1="230" y1="60" x2="300" y2="190" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="240" y="120" font-size="10" fill="#4b5563">1</text><text x="290" y="185" font-size="10" fill="#4b5563">0..1</text>
+</svg>

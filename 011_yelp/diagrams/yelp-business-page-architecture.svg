@@ -1,0 +1,80 @@
+<svg viewBox="0 0 750 380" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (REQUIRED) -->
+  <rect width="750" height="380" fill="#f8f9fa" rx="10"/>
+
+  <!-- Title -->
+  <text x="375" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Business Page: Parallel Fetch Architecture</text>
+
+  <!-- User -->
+  <rect x="40" y="160" width="100" height="60" rx="8" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="90" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">User</text>
+
+  <!-- API Gateway -->
+  <rect x="200" y="160" width="120" height="60" rx="8" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="260" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">API Gateway</text>
+
+  <!-- Business Service Path -->
+  <rect x="400" y="70" width="120" height="60" rx="8" fill="#9b59b6" stroke="#8e44ad" stroke-width="2"/>
+  <text x="460" y="98" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Business</text>
+  <text x="460" y="116" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Service</text>
+
+  <!-- Cache -->
+  <rect x="560" y="70" width="80" height="60" rx="8" fill="#e3f2fd" stroke="#3498db" stroke-width="2"/>
+  <text x="600" y="105" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#3498db">Cache</text>
+
+  <!-- Business DB -->
+  <rect x="670" y="70" width="60" height="60" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="700" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">DB</text>
+
+  <!-- Review Service Path -->
+  <rect x="400" y="250" width="120" height="60" rx="8" fill="#9b59b6" stroke="#8e44ad" stroke-width="2"/>
+  <text x="460" y="278" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Review</text>
+  <text x="460" y="296" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Service</text>
+
+  <!-- Review DB -->
+  <rect x="560" y="250" width="100" height="60" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="610" y="278" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Review DB</text>
+  <text x="610" y="296" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">(paginated)</text>
+
+  <!-- Arrow: User to Gateway -->
+  <path d="M 140,190 L 195,190" stroke="#3498db" stroke-width="2" fill="none"/>
+  <polygon points="195,190 185,185 185,195" fill="#3498db"/>
+
+  <!-- Arrow: Gateway to Business Service (fan out up) -->
+  <path d="M 320,175 Q 360,100 395,100" stroke="#9b59b6" stroke-width="2" fill="none"/>
+  <polygon points="395,100 385,95 385,105" fill="#9b59b6"/>
+
+  <!-- Arrow: Gateway to Review Service (fan out down) -->
+  <path d="M 320,205 Q 360,280 395,280" stroke="#9b59b6" stroke-width="2" fill="none"/>
+  <polygon points="395,280 385,275 385,285" fill="#9b59b6"/>
+
+  <!-- Arrow: Business Service to Cache -->
+  <path d="M 520,100 L 555,100" stroke="#3498db" stroke-width="2" fill="none"/>
+  <polygon points="555,100 545,95 545,105" fill="#3498db"/>
+
+  <!-- Arrow: Cache to DB (cache miss) -->
+  <path d="M 640,100 L 665,100" stroke="#7f8c8d" stroke-width="1.5" stroke-dasharray="4,2" fill="none"/>
+  <polygon points="665,100 658,96 658,104" fill="#7f8c8d"/>
+
+  <!-- Arrow: Review Service to Review DB -->
+  <path d="M 520,280 L 555,280" stroke="#27ae60" stroke-width="2" fill="none"/>
+  <polygon points="555,280 545,275 545,285" fill="#27ae60"/>
+
+  <!-- Labels -->
+  <text x="335" y="85" font-family="Arial, sans-serif" font-size="11" fill="#9b59b6">metadata +</text>
+  <text x="335" y="98" font-family="Arial, sans-serif" font-size="11" fill="#9b59b6">aggregates</text>
+
+  <text x="335" y="290" font-family="Arial, sans-serif" font-size="11" fill="#9b59b6">first 10</text>
+  <text x="335" y="303" font-family="Arial, sans-serif" font-size="11" fill="#9b59b6">reviews</text>
+
+  <!-- Fan-out label -->
+  <text x="260" y="145" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#f39c12">fan-out</text>
+
+  <!-- Cache miss label -->
+  <text x="652" y="88" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">miss</text>
+
+  <!-- Aggregates note -->
+  <rect x="560" y="140" width="170" height="45" rx="6" fill="#fff3cd" stroke="#f39c12" stroke-width="1"/>
+  <text x="645" y="158" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2c3e50">Precomputed:</text>
+  <text x="645" y="175" font-family="monospace" font-size="10" text-anchor="middle" fill="#2c3e50">rating_avg, rating_count</text>
+</svg>

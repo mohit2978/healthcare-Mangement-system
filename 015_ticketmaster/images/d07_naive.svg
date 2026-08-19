@@ -1,0 +1,16 @@
+<svg viewBox="0 0 660 120" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif">
+<rect x="0" y="0" width="660" height="120" fill="#ffffff"/>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4b5563"/></marker>
+<marker id="arrowb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111827"/></marker>
+</defs>
+<rect x="20" y="30" width="120" height="44" rx="22.0" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="80.0" y="57.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">User</text>
+<rect x="220" y="30" width="150" height="44" rx="10" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+<text x="295.0" y="57.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">App server</text>
+<path d="M 450 26.84 L 450 77.16 A 75.0 11.84 0 0 0 600 77.16 L 600 26.84" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<ellipse cx="525.0" cy="26.84" rx="75.0" ry="11.84" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<text x="525.0" y="60.552" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">Seat DB</text>
+<line x1="140" y1="52" x2="220" y2="52" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="370" y1="52" x2="450" y2="52" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

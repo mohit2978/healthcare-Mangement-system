@@ -1,0 +1,21 @@
+<svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif"><rect x="0" y="0" width="620" height="320" fill="#ffffff"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4b5563"/></marker></defs><text x="20" y="30" text-anchor="start" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#374151">Double-entry ledger (append-only)</text>
+<rect x="20" y="50" width="220" height="36" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+<text x="130.0" y="72.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" fill="#166534">+1000 cash (deposit)</text>
+<line x1="240" y1="68" x2="300" y2="92" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="20" y="96" width="220" height="36" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+<text x="130.0" y="118.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" fill="#166534">-600 cash (buy leg)</text>
+<line x1="240" y1="114" x2="300" y2="92" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="20" y="142" width="220" height="36" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+<text x="130.0" y="164.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" fill="#166534">+10 AAPL (buy leg)</text>
+<line x1="240" y1="160" x2="300" y2="92" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="310" y="60" width="260" height="66" rx="10" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+<text x="440.0" y="90.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">balance = Σ entries =</text>
+<text x="440.0" y="106.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">400 cash, 10 AAPL</text>
+<text x="20" y="220" text-anchor="start" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#374151">Overwritten balance column</text>
+<rect x="20" y="240" width="160" height="56" rx="10" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+<text x="100.0" y="273.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" fill="#ffffff">cash = 1000</text>
+<rect x="280" y="240" width="220" height="56" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+<text x="390.0" y="264.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#991b1b">cash = 400</text>
+<text x="390.0" y="279.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#991b1b">(history gone)</text>
+<line x1="180" y1="268" x2="280" y2="268" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="230.0" y="260.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#4b5563">buy</text></svg>

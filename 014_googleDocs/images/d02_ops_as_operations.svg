@@ -1,0 +1,9 @@
+<svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif"><rect x="0" y="0" width="680" height="200" fill="#ffffff"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4b5563"/></marker><marker id="arrowb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111827"/></marker></defs><rect x="30" y="25" width="220" height="44" rx="22.0" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="140.0" y="52.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">A: insert at position 0</text>
+<rect x="30" y="115" width="220" height="44" rx="22.0" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="140.0" y="142.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#ffffff">B: delete at position 2</text>
+<rect x="390" y="55" width="250" height="80" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+<text x="515.0" y="91.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#166534">both edits recorded,</text>
+<text x="515.0" y="106.0" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#166534">reconcilable individually</text>
+<path d="M 250 47 Q 320.0 48.5 390 80" fill="none" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 250 137 Q 320.0 136.0 390 105" fill="none" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arrow)"/></svg>
