@@ -1,5 +1,5 @@
 
-# Healthcare Microservices Project by HungryCoders
+# Healthcare Microservices Project
 
 This project is a **Healthcare Microservices System** designed for self-learning and interview preparation. It includes services for authentication, appointments, doctor and patient management, notifications, and more. The system is implemented using **Spring Boot**, **Kafka**, **MongoDB**, **ReactJS**, and **Docker**.
 
@@ -435,4 +435,4 @@ Happy coding! ✌️
 
 ## License
 
-This project is by **HungryCoders** for educational purposes and self-learning only.
+This project is for educational purposes and self-learning only.

@@ -75,7 +75,7 @@ The `EmailService` sends emails based on the status of the appointment:
       Doctor's Comments: N/A
       
       Thank you,
-      Team HungryCoders
+      Team Healthcare
       ```
 
 2. **Confirmed**
@@ -92,7 +92,7 @@ The `EmailService` sends emails based on the status of the appointment:
       Doctor's Comments: N/A
       
       Thank you,
-      Team HungryCoders
+      Team Healthcare
       ```
 
 3. **Rejected**
@@ -109,7 +109,7 @@ The `EmailService` sends emails based on the status of the appointment:
       Doctor's Comments: N/A
       
       Thank you,
-      Team HungryCoders
+      Team Healthcare
       ```
 
 4. **Completed**
@@ -126,7 +126,7 @@ The `EmailService` sends emails based on the status of the appointment:
       Doctor's Comments: eye drop 3 times a day
       
       Thank you,
-      Team HungryCoders
+      Team Healthcare
       ```
 
 ---

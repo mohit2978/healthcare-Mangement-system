@@ -19,15 +19,15 @@ public class EmailService {
     private static final String APPOINTMENT_COMPLETED_SUBJECT = "Appointment Completed";
 
     private static final String APPOINTMENT_PENDING_EMAIL_BODY =
-            "Dear Doctor,\n\nYour appointment with Patient: %s is currently pending approval.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam HungryCoders";
+            "Dear Doctor,\n\nYour appointment with Patient: %s is currently pending approval.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam Healthcare";
     private static final String APPOINTMENT_CONFIRMED_EMAIL_BODY =
-            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been confirmed.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam HungryCoders";
+            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been confirmed.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam Healthcare";
     private static final String APPOINTMENT_REJECTED_EMAIL_BODY =
             "Dear Patient,\n\nWe regret to inform you that your appointment with Doctor ID: %s has been rejected.\nPlease contact support for further assistance.\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam";
     private static final String APPOINTMENT_UPDATED_EMAIL_BODY =
-            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been updated.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam HungryCoders";
+            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been updated.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam Healthcare";
     private static final String APPOINTMENT_COMPLETED_EMAIL_BODY =
-            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been successfully completed.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam HungryCoders";
+            "Dear Patient,\n\nYour appointment with Doctor ID: %s has been successfully completed.\nAppointment Date and Time: %s\nNotes: %s\nDoctor's Comments: %s\n\nThank you,\nTeam Healthcare";
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
 
