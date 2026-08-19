@@ -1,0 +1,66 @@
+receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
+processors:
+    batch:
+      send_batch_max_size: 1000
+      send_batch_size: 100
+      timeout: 10s
+    memory_limiter:
+        check_interval: 1s
+        limit_mib: 4000
+        spike_limit_mib: 200
+
+exporters:
+    debug:
+      verbosity: detailed
+
+    prometheus:
+      endpoint: "0.0.0.0:8889"
+      enable_open_metrics: true
+
+    otlphttp/loki:
+      endpoint: "http://loki:3100/otlp"
+      tls:
+        insecure: true
+
+    otlp/jaeger:
+      endpoint: "http://jaeger:4317"
+      tls:
+        insecure: true
+
+    zipkin:
+      endpoint: "http://zipkin:9411/api/v2/spans"
+      format: proto
+
+    otlp/tempo:
+      endpoint: "http://tempo:4317"
+      tls:
+        insecure: true
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+service:
+    extensions: [health_check, zpages]
+    pipelines:
+      metrics:
+        receivers: [otlp]
+        processors: [memory_limiter, batch]
+        exporters: [debug, prometheus]
+      traces:
+        receivers: [otlp]
+        processors: [memory_limiter, batch]
+        exporters: [debug, otlp/jaeger, zipkin, otlp/tempo]
+      logs:
+        receivers: [otlp]
+        processors: [memory_limiter, batch]
+        exporters: [debug, otlphttp/loki]

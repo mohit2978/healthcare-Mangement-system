@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: "configserver:${CONFIG_SERVER_URL:http://admin-service:8080/config},optional:configtree:/run/secrets/"
+  cloud:
+    config:
+      enabled: true
+      fail-fast: true

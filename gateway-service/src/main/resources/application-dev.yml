@@ -1,0 +1,91 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowed-origins: [ "http://localhost:9090" ]
+            allowed-methods: [ "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ]
+            allowed-headers: [ "Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin" ]
+            exposed-headers: [ "Authorization", "Location" ]
+            allow-credentials: true
+            max-age: 3600
+  boot:
+    admin:
+      client:
+        enabled: false
+        instance:
+          name: Gateway Service
+          service-url: ${ADMIN_CLIENT_INSTANCE_SERVICE_URL:http://127.0.0.1:8080}
+        url: ${ADMIN_CLIENT_URL:http://127.0.0.1:9080}
+        auto-registration: true
+  main:
+    web-application-type: reactive
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: "*"
+        liveness:
+          include: "*"
+    configprops:
+      show-values: always
+  ## OpenTelemetry Metrics config
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+  ## OpenTelemetry Tracing config
+  tracing:
+    enabled: true
+    sampling:
+      # Management tracing sampling probability (1.0 = 100% traces sampled) for dev environment only
+      probability: 1.0
+  otlp:
+    # OTLP Metrics Exporter config
+    metrics:
+      export:
+        enabled: ${OTLP_METRICS_EXPORT_ENABLED:true}
+        url: ${OTLP_METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+    # OTLP Tracing Exporter config
+    tracing:
+      export:
+        enabled: ${OTLP_TRACING_EXPORT_ENABLED:true}
+      transport: ${OTLP_TRACING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_TRACING_EXPORT_URL:http://localhost:4318/v1/traces}
+    # OTLP Logging Exporter config
+    logging:
+      export:
+        enabled: ${OTLP_LOGGING_EXPORT_ENABLED:true}
+      transport: ${OTLP_LOGGING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_LOGGING_EXPORT_URL:http://localhost:4318/v1/logs}
+
+server:
+  port: ${GATEWAY_SERVICE_PORT:8080}
+
+api-gateway:
+  auth-service-base-url: ${AUTH_SERVICE_BASE_URL:http://127.0.0.1:8180}
+  auth-service-uri: ${AUTH_SERVICE_URI:/api/v1/auth}
+  doctor-service-base-url: ${DOCTOR_SERVICE_BASE_URL:http://127.0.0.1:8280}
+  doctor-service-uri: ${DOCTOR_SERVICE_URI:/api/v1/doctor}
+  patient-service-base-url: ${PATIENT_SERVICE_BASE_URL:http://127.0.0.1:8380}
+  patient-service-uri: ${PATIENT_SERVICE_URI:/api/v1/patient}
+  appointments-service-base-url: ${APPOINTMENTS_SERVICE_BASE_URL:http://127.0.0.1:8480}
+  appointments-service-uri: ${APPOINTMENTS_SERVICE_URI:/api/v1/appointments}

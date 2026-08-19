@@ -1,0 +1,100 @@
+app:
+  environment: prod
+
+spring:
+  boot:
+    admin:
+      client:
+        enabled: ${SPRING_BOOT_ADMIN_CLIENT_ENABLED:false}
+        instance:
+          name: Appointment Service
+          service-url: ${ADMIN_CLIENT_INSTANCE_SERVICE_URL:http://127.0.0.1:8080}
+        url: ${ADMIN_CLIENT_URL:http://127.0.0.1:9080}
+        auto-registration: true
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://root:rootpassword@127.0.0.1:27017/healthcare?authSource=admin}
+  kafka:
+    producer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:127.0.0.1:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topic:
+      name: ${KAFKA_TOPIC:appointments}
+    ## Kafka Observation Configuration
+    listener:
+      observation-enabled: true
+    template:
+      observation-enabled: true
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.servlet: INFO
+    org.apache.kafka.clients.producer: INFO
+  ## Logging config
+  config: classpath:logback-prod.xml
+  structured:
+    format:
+      console: logstash
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+  health:
+    probes:
+      enabled: true
+      show-details: always
+      show-components: always
+    group:
+      readiness:
+        include: "*"
+        show-components: always
+        show-details: always
+      liveness:
+        include: "*"
+        show-components: always
+        show-details: always
+  ## OpenTelemetry Metrics config
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+  ## OpenTelemetry Tracing config
+  tracing:
+    enabled: true
+    sampling:
+      probability: 0.1
+  otlp:
+    # OTLP Metrics Exporter config
+    metrics:
+      export:
+        enabled: ${OTLP_METRICS_EXPORT_ENABLED:true}
+        url: ${OTLP_METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+    # OTLP Tracing Exporter config
+    tracing:
+      export:
+        enabled: ${OTLP_TRACING_EXPORT_ENABLED:true}
+      transport: ${OTLP_TRACING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_TRACING_EXPORT_URL:http://localhost:4318/v1/traces}
+    # OTLP Logging Exporter config
+    logging:
+      export:
+        enabled: ${OTLP_LOGGING_EXPORT_ENABLED:true}
+      transport: ${OTLP_LOGGING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_LOGGING_EXPORT_URL:http://localhost:4318/v1/logs}
+
+server:
+  port: ${APPOINTMENT_SERVICE_PORT:8480}
+
+doctor:
+  service:
+    url: ${DOCTOR_SERVICE_URL:http://doctor-service:8080/api/v1/doctor}
+
+patient:
+  service:
+    url: ${PATIENT_SERVICE_URL:http://patient-service:8080/api/v1/patient}

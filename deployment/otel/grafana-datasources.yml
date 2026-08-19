@@ -1,0 +1,104 @@
+datasources:
+  - name: Prometheus
+    type: prometheus
+    uid: prometheus
+    apiVersion: 1
+    access: proxy
+    orgId: 1
+    url: http://prometheus:9090
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    jsonData:
+      httpMethod: GET
+      exemplarTraceIdDestinations:
+        - datasourceUid: tempo
+        - datasourceUid: jaeger
+        - datasourceUid: zipkin
+      exemplarTraceIdKey:
+          name: trace_id
+  - name: Loki
+    type: loki
+    uid: loki
+    access: proxy
+    orgId: 1
+    url: http://loki:3100
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: loki
+        spanStartTimeShift: '-1h'
+        spanEndTimeShift: '1h'
+        filterByTraceID: true
+        filterBySpanID: true
+        tags: [ { key: 'service.name', value: 'job' } ]
+  - name: Tempo
+    type: tempo
+    access: proxy
+    orgId: 1
+    url: http://tempo:3200
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    apiVersion: 1
+    uid: tempo
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: loki
+        spanStartTimeShift: '-1h'
+        spanEndTimeShift: '1h'
+        filterByTraceID: true
+        filterBySpanID: true
+        tags: [ { key: 'service', value: 'job' } ]
+      serviceMap:
+        datasourceUid: prometheus
+        nodeGraph:
+          enabled: true
+        search:
+          filters:
+            - tag: service.name
+              operator: "="
+              scope: resource
+  - name: Jaeger
+    type: jaeger
+    access: proxy
+    orgId: 1
+    url: http://jaeger:16686
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    apiVersion: 1
+    uid: jaeger
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: loki
+        spanStartTimeShift: '-1h'
+        spanEndTimeShift: '1h'
+        filterByTraceID: true
+        filterBySpanID: true
+        tags: [ { key: 'service', value: 'job' } ]
+  - name: Zipkin
+    type: zipkin
+    access: proxy
+    orgId: 1
+    url: http://zipkin:9411
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    apiVersion: 1
+    uid: zipkin
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: loki
+        spanStartTimeShift: '-1h'
+        spanEndTimeShift: '1h'
+        filterByTraceID: true
+        filterBySpanID: true
+        tags: [ { key: 'service', value: 'job' } ]

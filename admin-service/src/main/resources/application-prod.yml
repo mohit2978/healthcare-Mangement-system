@@ -1,0 +1,72 @@
+# Spring Boot Admin Configuration
+spring:
+  boot:
+    admin:
+      server:
+        enabled: true
+      context-path: /
+      monitor:
+        default-retries: 3
+        status-interval: 10000
+        status-lifetime: 10000
+      probed-endpoints: info
+      ui:
+        title: Healthcare Admin Panel
+  cloud:
+    config:
+      server:
+        prefix: /config
+        native:
+          search-locations: ${CONFIG_LOCATION:classpath:/configs/{application}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: "*"
+        liveness:
+          include: "*"
+  ## OpenTelemetry Metrics config
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+  ## OpenTelemetry Tracing config
+  tracing:
+    enabled: true
+    sampling:
+      probability: 0.1
+  otlp:
+    # OTLP Metrics Exporter config
+    metrics:
+      export:
+        enabled: ${OTLP_METRICS_EXPORT_ENABLED:true}
+        url: ${OTLP_METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+    # OTLP Tracing Exporter config
+    tracing:
+      export:
+        enabled: ${OTLP_TRACING_EXPORT_ENABLED:true}
+      transport: ${OTLP_TRACING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_TRACING_EXPORT_URL:http://localhost:4318/v1/traces}
+    # OTLP Logging Exporter config
+    logging:
+      export:
+        enabled: ${OTLP_LOGGING_EXPORT_ENABLED:true}
+      transport: ${OTLP_LOGGING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_LOGGING_EXPORT_URL:http://localhost:4318/v1/logs}
+
+## Logging config
+logging:
+  config: classpath:logback-prod.xml
+  structured:
+    format:
+      console: logstash

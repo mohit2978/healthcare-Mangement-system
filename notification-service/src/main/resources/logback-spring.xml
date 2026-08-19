@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+    <springProperty name="CONSOLE_LOG_CHARSET" source="logging.console.charset"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP_NAME}] [%thread] [%X{traceId:-}:%X{spanId:-}] %-5level %logger{36} - %msg%n</pattern>
+            <charset>${CONSOLE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- Async Appender wrapping the console appender -->
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE"/>
+        <discardingThreshold>0</discardingThreshold>
+        <neverBlock>true</neverBlock>
+        <queueSize>10000</queueSize>
+        <includeCallerData>false</includeCallerData>
+    </appender>
+
+    <root level="INFO" additivity="true">
+        <appender-ref ref="ASYNC_CONSOLE"/>
+    </root>
+
+    <springProfile name="dev">
+        <!-- OTEL Logback Appender -->
+        <appender name="OTEL_LOG" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+            <captureExperimentalAttributes>true</captureExperimentalAttributes>
+            <captureCodeAttributes>true</captureCodeAttributes>
+            <captureMarkerAttribute>true</captureMarkerAttribute>
+            <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
+            <captureLoggerContext>true</captureLoggerContext>
+            <captureMdcAttributes>*</captureMdcAttributes>
+        </appender>
+
+        <root level="INFO" additivity="true">
+            <appender-ref ref="OTEL_LOG"/>
+        </root>
+    </springProfile>
+</configuration>

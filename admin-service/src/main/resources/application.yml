@@ -1,0 +1,7 @@
+# Spring Boot Admin Configuration
+spring:
+  application:
+    name: admin-service
+  profiles:
+    include: native
+    active: ${SPRING_PROFILES_ACTIVE:dev}

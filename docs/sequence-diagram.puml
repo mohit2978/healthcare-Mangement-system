@@ -1,0 +1,93 @@
+@startuml
+title Healthcare Microservices - Sequence Diagram
+
+actor Client
+participant "API Gateway" as api_gateway
+participant "Auth Service" as auth_service
+participant "Doctor Service" as doctor_service
+participant "Patient Service" as patient_service
+participant "Appointment Service" as appointment_service
+database MongoDB
+queue "Apache Kafka" as Kafka
+participant "Notification Service" as notification_service
+participant "SMTP Server" as SMTP
+
+== Authentication Flow ==
+Client -> api_gateway: POST /api/v1/auth/signin (SignIn)
+api_gateway -> auth_service: Sign-In
+auth_service -> MongoDB: Verify Credentials
+MongoDB --> auth_service: Credentials Valid
+auth_service --> api_gateway: Return JWT Token
+api_gateway --> Client: Return JWT Token (200 OK)
+
+Client -> api_gateway: POST /api/v1/auth/signup (SignUp)
+api_gateway -> auth_service: Forward Sign-Up
+auth_service -> MongoDB: Verify User Credentials
+MongoDB --> auth_service: Create/Save User
+auth_service --> api_gateway: Return JWT Token
+api_gateway --> Client: Return JWT Token (200 OK)
+
+Client -> api_gateway: POST /api/v1/auth
+api_gateway -> auth_service: Forward Authentication
+auth_service -> MongoDB: Verify Credentials
+MongoDB --> auth_service: Credentials Valid
+auth_service --> api_gateway: Return (202 ACCEPTED)
+api_gateway --> Client: 202 ACCEPTED
+
+== Business Flow: Patient Operations ==
+Client -> api_gateway: GET /api/v1/patient/details
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> patient_service: Route to Patient Service
+patient_service -> MongoDB: Query Patient Details
+MongoDB --> patient_service: Patient Data
+patient_service --> Client: Patient Details
+
+Client -> api_gateway: POST /api/v1/appointments/create
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> appointment_service: Route to Appointment Service
+appointment_service -> MongoDB: Save Appointment (PENDING)
+MongoDB --> appointment_service: Acknowledged
+appointment_service -> Kafka: Publish "Appointment Created" Event
+appointment_service --> Client: 200 OK
+
+Client -> api_gateway: GET /api/v1/appointments/patient/{id}
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> appointment_service: Route to Appointment Service
+appointment_service -> MongoDB: Query Appointments
+MongoDB --> appointment_service: Appointments List
+appointment_service --> Client: Appointments List
+
+== Business Flow: Doctor Operations ==
+Client -> api_gateway: GET /api/v1/doctor/details
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> doctor_service: Route to Doctor Service
+doctor_service -> MongoDB: Query Doctor Details
+MongoDB --> doctor_service: Doctor Data
+doctor_service --> Client: Doctor Details
+
+Client -> api_gateway: GET /api/v1/appointments/doctor/{id}
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> appointment_service: Route to Appointment Service
+appointment_service -> MongoDB: Query Appointments
+MongoDB --> appointment_service: Appointments List
+appointment_service --> Client: Appointments List
+
+Client -> api_gateway: PUT /api/v1/appointments/{id}/status\n(APPROVE/REJECT)
+api_gateway -> auth_service: Validate JWT & RBAC
+auth_service --> api_gateway: 202 ACCEPTED
+api_gateway -> appointment_service: Route to Appointment Service
+appointment_service -> MongoDB: Update Appointment Status
+MongoDB --> appointment_service: Acknowledged
+appointment_service -> Kafka: Publish "Appointment Updated" Event
+appointment_service --> Client: 200 OK
+
+== Event-Driven Notification ==
+Kafka <- notification_service: Consume Events (Created/Updated)
+notification_service -> SMTP: Generate & Send Email
+SMTP --> Client: Deliver Email (Confirmation/Rejection/Creation)
+@enduml

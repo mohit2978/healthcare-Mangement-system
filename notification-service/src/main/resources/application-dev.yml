@@ -1,0 +1,88 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  boot:
+    admin:
+      client:
+        enabled: false
+        instance:
+          name: Notification Service
+          service-url: ${ADMIN_CLIENT_INSTANCE_SERVICE_URL:http://127.0.0.1:8080}
+        url: ${ADMIN_CLIENT_URL:http://127.0.0.1:9080}
+        auto-registration: true
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:127.0.0.1:9092}
+      group-id: mygroupid
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    topic:
+      name: ${KAFKA_TOPIC:appointments}
+    ## Kafka Observation Configuration
+    listener:
+      observation-enabled: true
+    template:
+        observation-enabled: true
+  mail:
+    host: ${MAIL_SERVER_HOST:127.0.0.1}
+    port: ${MAIL_SERVER_PORT:1025}
+    username: ${MAIL_SERVER_USERNAME:noreplyadmin@email.com}
+    password: ${MAIL_SERVER_PASSWORD:secret}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: "*"
+        liveness:
+          include: "*"
+      show-details: always
+  ## OpenTelemetry Metrics config
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+  ## OpenTelemetry Tracing config
+  tracing:
+    enabled: true
+    sampling:
+      # Management tracing sampling probability (1.0 = 100% traces sampled) for dev environment only
+      probability: 1.0
+  otlp:
+    # OTLP Metrics Exporter config
+    metrics:
+      export:
+        enabled: ${OTLP_METRICS_EXPORT_ENABLED:true}
+        url: ${OTLP_METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+    # OTLP Tracing Exporter config
+    tracing:
+      export:
+        enabled: ${OTLP_TRACING_EXPORT_ENABLED:true}
+      transport: ${OTLP_TRACING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_TRACING_EXPORT_URL:http://localhost:4318/v1/traces}
+    # OTLP Logging Exporter config
+    logging:
+      export:
+        enabled: ${OTLP_LOGGING_EXPORT_ENABLED:true}
+      transport: ${OTLP_LOGGING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_LOGGING_EXPORT_URL:http://localhost:4318/v1/logs}
+
+server:
+  port: ${NOTIFICATION_SERVICE_PORT:8080}

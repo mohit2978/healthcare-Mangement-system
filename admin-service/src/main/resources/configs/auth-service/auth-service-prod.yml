@@ -1,0 +1,91 @@
+spring:
+  boot:
+    admin:
+      client:
+        enabled: ${SPRING_BOOT_ADMIN_CLIENT_ENABLED:false}
+        instance:
+          name: Auth Service
+          service-url: ${ADMIN_CLIENT_INSTANCE_SERVICE_URL:http://127.0.0.1:8080}
+        url: ${ADMIN_CLIENT_URL:http://127.0.0.1:9080}
+        auto-registration: true
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://root:rootpassword@127.0.0.1:27017/healthcare?authSource=admin}
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.servlet: INFO
+  ## Logging config
+  config: classpath:logback-prod.xml
+  structured:
+    format:
+      console: logstash
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+  health:
+    probes:
+      enabled: true
+      show-details: always
+      show-components: always
+    group:
+      readiness:
+        include: "*"
+        show-components: always
+        show-details: always
+      liveness:
+        include: "*"
+        show-components: always
+        show-details: always
+  ## OpenTelemetry Metrics config
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+  ## OpenTelemetry Tracing config
+  tracing:
+    enabled: true
+    sampling:
+      probability: 0.1
+  otlp:
+    # OTLP Metrics Exporter config
+    metrics:
+      export:
+        enabled: ${OTLP_METRICS_EXPORT_ENABLED:true}
+        url: ${OTLP_METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+    # OTLP Tracing Exporter config
+    tracing:
+      export:
+        enabled: ${OTLP_TRACING_EXPORT_ENABLED:true}
+      transport: ${OTLP_TRACING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_TRACING_EXPORT_URL:http://localhost:4318/v1/traces}
+    # OTLP Logging Exporter config
+    logging:
+      export:
+        enabled: ${OTLP_LOGGING_EXPORT_ENABLED:true}
+      transport: ${OTLP_LOGGING_EXPORT_TRANSPORT-TYPE:http}
+      endpoint: ${OTLP_LOGGING_EXPORT_URL:http://localhost:4318/v1/logs}
+server:
+  port: ${AUTH_SERVICE_PORT:8180}
+
+jwt:
+  secret: ${JWT_SECRET:aHR0cHM6Ly93d3cueW91YmlsdW1hbWVyaWNhLmNvbS9sb2dpbi8=}
+  expiration: ${JWT_EXPIRATION:600000}
+
+authorization:
+  role-policies:
+    - role: DOCTOR
+      methods: [ GET, POST, PUT ]
+      paths: [ "/api/v1/doctor/**", "/api/v1/appointments", "/api/v1/appointments/doctor/**" ]
+    - role: PATIENT
+      methods: [ GET, POST, PUT ]
+      paths: [ "/api/v1/patient/**", "/api/v1/appointments/create", "/api/v1/appointments", "/api/v1/appointments/patient/**", "/api/v1/doctor/all", ]
+    - role: ADMIN
+      methods: [ GET, POST, PUT, PATCH, DELETE ]
+      paths: [ "/api/**" ]
